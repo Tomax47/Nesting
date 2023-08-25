@@ -11,6 +11,19 @@
   </head>
 
   <body>
+
+  <header class="header" >
+    <div class="header-content">
+      <h1 class="logo">Nesting</h1>
+
+      <ul class="list">
+        <li class="sing-up"><%= link_to 'Sing-Up', users_new_path %></li>
+        <li class="sign-in">Sign-In</li>
+      </ul>
+    </div>
+  </header>
+
+
   <p style="color: #B00100"><%= notice %></p>
     <%= yield %>
   </body>
