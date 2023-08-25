@@ -1,0 +1,20 @@
+
+
+
+<center>
+  <section class="posts">
+    <% @posts.each do |post| %>
+      <div class="title">
+        <%= link_to post.title, post %>
+      </div>
+      <div class="content">
+        <%= truncate post.content, length: 150 %>
+      </div>
+      <hr />
+    <% end %>
+  </section>
+
+  <div class="new-post">
+    <%= link_to 'New Post', new_post_path %>
+  </div>
+</center>

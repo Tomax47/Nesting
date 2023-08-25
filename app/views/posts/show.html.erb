@@ -1,0 +1,23 @@
+
+
+<center>
+  <section class="post">
+    <div class="post-content">
+
+      <div class="title">
+        <p class="title"><strong>Title</strong></p>
+        <%= @post.title %>
+      </div>
+
+      <div class="content">
+        <p class="content"><strong>content</strong></p>
+        <%= @post.content %>
+      </div>
+
+      <%= button_to 'Delete', post_path(@post), method: :delete, form: {data: {turbo_confirm: 'Are you sure?' }} %>
+      <%= link_to 'Edit', edit_post_path %>
+      <%= link_to 'Home', posts_path %>
+
+    </div>
+  </section>
+</center>
