@@ -20,4 +20,20 @@
 
     </div>
   </section>
+  <br />
+  <div class="comment-count"><h3><%= @post.comments.count %> <strong> Comments</strong></h3></div>
+</center>
+
+
+<br /> <hr />
+<center>
+  <section class="comments-section">
+    <%= render @post.comments.where(parent_id: nil).order(id: :desc) %>
+
+
+    <h2>Leave a reply</h2>
+    <div class="form">
+      <%= render partial: 'comments/format', locals:  { post: @post, parent: nil}%>
+    </div>
+  </section>
 </center>

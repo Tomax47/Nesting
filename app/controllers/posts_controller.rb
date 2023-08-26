@@ -1,4 +1,8 @@
 class PostsController < ApplicationController
+
+  before_action :ensure_user
+  before_action :correct_user, only: [:edit, :update, :destroy]
+
   def index
     @posts = Post.all.order("created_at DESC")
   end
@@ -9,12 +13,12 @@ class PostsController < ApplicationController
 
 
   def new
-    @post = Post.new
+    @post = current_user.posts.new
   end
 
 
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.new(post_params)
 
     if @post.save
       redirect_to post_url(@post)
@@ -29,7 +33,7 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post = set_post
+    @post = current_user.posts.find(params[:id])
 
     if @post.update(post_params)
       redirect_to post_url(@post)
@@ -40,7 +44,7 @@ class PostsController < ApplicationController
 
 
   def destroy
-    @post = set_post
+    @post = current_user.posts.find([params[:id]])
 
     if @post.destroy
       redirect_to posts_path, notice: "Post has been deleted!"
@@ -51,6 +55,11 @@ class PostsController < ApplicationController
 
 
   private
+
+  def correct_user
+    @post = current_user.posts.find_by(id: params[:id])
+    redirect_to root_path, notice: "You are not authorized to edit this post!" if @post.nil?
+  end
 
   def set_post
     return Post.find(params[:id])

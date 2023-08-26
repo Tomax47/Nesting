@@ -1,0 +1,45 @@
+
+<article>
+
+  <p><strong>@<%= comment.user.username %></strong></p>
+  <!-- HERE WE ARE REFERENCING THE COMMENT MODEL WITH THE COMMENT DATATYPE IN THE DB-->
+  <p class="comment-body">
+    <%= comment.content%>
+  </p>
+
+  <a href="#" class="comment-form-display">Reply</a>
+  <div class="reply-sub-comment">
+    <%= render partial: 'comments/format', locals: {post: comment.post, parent: comment} %>
+  </div>
+
+  <hr />
+  <div class="sub-comment">
+    <%= render comment.comments %>
+  </div>
+
+    <%# if current_user.id == comment.user_id %>
+      <%# button_to 'Delete',post_delete_path(comment), method: :delete, form: {data: {turbo_confirm: "Are You Sure?"}} %>
+    <%# end %>
+</article>
+
+
+</div>
+
+<script>
+  document.querySelectorAll('.comment-form-display').forEach((el) => {
+      el.addEventListener('click', (ev) => {
+          ev.preventDefault();
+          el.nextElementSibling.style = 'display: block;'
+      })
+  })
+</script>
+
+<style>
+    .sub-comment {
+        padding-left: 6em;
+    }
+
+    .reply-sub-comment {
+        display: none;
+    }
+</style>

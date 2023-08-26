@@ -8,8 +8,9 @@ class UsersController < ApplicationController
 
     if @user.save
       redirect_to root_path, notice: "welcome "+@user.username
+      session[:user_id] = @user.id
     else
-      redirect_to users_new_path, @user.errors.full_messages.to_s
+      redirect_to users_new_path, notice: @user.errors.full_messages.to_sentence
     end
   end
 

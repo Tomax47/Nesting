@@ -1,16 +1,30 @@
-<form action="<%= posts_path(@post) %>" method="post">
+<%= form_with(model: @post) do |form|%>
+  <% if @post.errors.any? %>
+    <div style="color: crimson">
+      <h2><center><%= pluralize(@post.errors.count, "error") %>prohibited this post from being saved:</center></h2>
 
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <ul>
+        <% @post.errors.each do |error| %>
+          <li><center><%= error.full_message%></center></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-  <div class="title-div">
-    <input name="post[title]" id="title" type="title" class="title-space">
+  <div>
+    <center><%= form.label :title, style: "display: block", class:"title-label"%>
+      <%= form.text_field :title, class:"title-input"%>
+    </center>
   </div>
 
-  <div class="content-div">
-    <textarea name="post[content]" id="content" type="body" class="textarea-space"></textarea>
+  <div>
+    <center><%= form.label :content, style: "display: block", class:"content-label" %>
+      <%= form.text_field :content, class:"content-input"%>
+    </center>
   </div>
 
-  <button type="submit" value="Submit" class="submit-btn">Post</button>
 
-
-</form>
+  <div>
+    <center><%= form.submit class:"button"%></center>
+  </div>
+<% end %>

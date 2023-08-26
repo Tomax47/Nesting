@@ -1,6 +1,7 @@
 class User < ApplicationRecord
 
   has_many :posts
+  has_many :comments
 
   validates :email, uniqueness: true, allow_nil: true
   validates :username, uniqueness: true, presence: true

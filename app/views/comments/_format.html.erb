@@ -1,0 +1,14 @@
+
+<form action="<%= post_comments_path(post) %>" method="post">
+
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <% if !parent.nil? %>
+    <input type="hidden" name="comment[parent_id]" value="<%= parent.id %>">
+  <% end %>
+
+  <div class="comment-content">
+    <textarea name="comment[content]" id="body" type="body" class="textarea-space"></textarea>
+    <button type="submit" value="Submit" class="submit-btn">Post</button>
+  </div>
+
+</form>
