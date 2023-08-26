@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     get '/delete', to: 'comments#destroy'
   end
 
+  resources :likes, only: [:destroy, :create]
+
   resources :sessions, only: [:create, :destroy]
   get 'sessions/new'
   get 'sing_in', to: 'sessions#new'

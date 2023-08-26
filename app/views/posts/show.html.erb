@@ -21,6 +21,42 @@
     </div>
   </section>
   <br />
+
+  <div class="likes-count"><h4><%= @post.likes.count %><strong> Likes</strong></h4></div>
+
+  <% if current_user.likes.find_by(post: @post).nil? %>
+    <!-- Here in the button_to we will have to add those hidden params to the request so it adds the like correctly, like the post_id fe, so we add em as params -->
+    <%= button_to 'Like', likes_path, params: { like: {post_id: @post.id}},method: :post %>
+
+    <!-- ANOTHER WAY TO CREATE THIS LIKE BUTTON -->
+    <!--
+    <form action="/likes" method="post">
+      <input type="hidden" name="authenticity_token" value="<%# form_authenticity_token %>">
+      <input type="hidden" name="like[post_id]" value="<%# @post.id %>">
+
+      <input type="submit" value="Like">
+    </form>
+    -->
+
+  <% else %>
+
+    <% like = current_user.likes.find_by(post: @post) %>
+    <%= button_to 'Unlike', like_path(like), method: :delete%> <!-- THIS IS A WAY OF DELETING THE LIKE, AND DOWN HERE IS THE OTHER WAY -->
+
+
+    <!--<form action="<%# like_path(like) %>" method="post">
+       ##NOTE : IN THE ACTION WE NEED TO SPECIFY THE PATH TO THIS SPECIFIC COMMENT, AS WE ARE GOING TO DELETE THIS SPECIFIC COMMENT
+           AS WELL, TO MAKE THE REQUEST A DELETE REQUEST INSTEAD OF A POST REQUEST,WE WILL HAVE TO SPECIFY IT WITH A HIDDEN INPUT WITH THE VALUE OF DELETE AND THE NAME OF _METHOD ##
+
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <input type="hidden" name="_method" value="DELETE">
+
+      <input type="submit" value="Unlike">
+    </form> -->
+
+  <%end %>
+
+
   <div class="comment-count"><h3><%= @post.comments.count %> <strong> Comments</strong></h3></div>
 </center>
 
