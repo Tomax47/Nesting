@@ -44,12 +44,15 @@ class PostsController < ApplicationController
 
 
   def destroy
-    @post = current_user.posts.find([params[:id]])
+    @post = current_user.posts.find(params[:id])
+    #TODO: FIND A WAY TO DELETE THE COMMENTS AND THE LIKES ASSOCIATED WITH THE POST WHEN DELETING THE POST ITSELF!
+    # WHAT'S CAUSING THE PROBLEM, IT THAT WHEN DELETING THE POST, THE COMMENTS AND THE LIKES ASSOCIATED WITH IT AIN'T GETTING DELETED, SO IT SHOWS A SQLLITE NOTNULLVIOLATION ERROR, AS THE COMMENTS AND LIKES POST_ID CAN'T BE NULL!!!
 
     if @post.destroy
-      redirect_to posts_path, notice: "Post has been deleted!"
+      redirect_to posts_path, notice: "Post has been successfully deleted!"
     else
-      redirect_to post_url(@post), notice: "Couldn't delete the post!"
+      redirect_to @post
+      flash[:notice] = "Can't delete the post!"
     end
   end
 
