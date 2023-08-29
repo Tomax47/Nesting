@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
   #get 'posts/index'
-  resources :posts do
+  resources :posts, only: [:create, :destroy, :show, :update, :edit] do
     resources :comments, only: [:destroy, :create]
     get '/delete', to: 'comments#destroy'
   end
+
+  get '/delete_post', to: 'posts#destroy'
 
   resources :likes, only: [:destroy, :create]
 

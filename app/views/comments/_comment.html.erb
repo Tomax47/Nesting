@@ -7,6 +7,12 @@
     <%= comment.content%>
   </p>
 
+  <!-- TODO: CHECK OUT WHY THE DELETE FUNCTION AIN'T WORKING-->
+  <% if current_user.id == comment.user_id %>
+    <% comment_is = current_user.comments.find_by(post: comment.post) %>
+    <%= button_to 'Delete', post_comment_path(comment_is), method: :delete %>
+  <%end %>
+
   <a href="#" class="comment-form-display">Reply</a>
   <div class="reply-sub-comment">
     <%= render partial: 'comments/format', locals: {post: comment.post, parent: comment} %>
@@ -17,9 +23,7 @@
     <%= render comment.comments %>
   </div>
 
-    <%# if current_user.id == comment.user_id %>
-      <%# button_to 'Delete',post_delete_path(comment), method: :delete, form: {data: {turbo_confirm: "Are You Sure?"}} %>
-    <%# end %>
+
 </article>
 
 

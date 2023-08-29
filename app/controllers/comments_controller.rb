@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
 
-  #before_action :correct_User, only: [:destroy]
+  before_action :correct_User, only: [:destroy]
 
   def new
     @comment = current_user.comments.new
@@ -18,15 +18,15 @@ class CommentsController < ApplicationController
   end
 
 
-  #def destroy
-  # @comment = current_user.comments.find(params[:id])
+  def destroy
+   @comment = current_user.comments.find(params[:id])
 
-  #if @comment.destroy
-      #redirect_to post_comments_path
-      #else
-      #flash[:notice] = "Couldn't delete the comment!"
-      # end
-  #end
+  if @comment.destroy
+      redirect_to post_comments_path
+      else
+      flash[:notice] = "Couldn't delete the comment!"
+       end
+  end
 
 
   private

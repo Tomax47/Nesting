@@ -14,7 +14,7 @@
         <%= @post.content %>
       </div>
 
-      <%= button_to 'Delete', post_path(@post), method: :delete, form: {data: {turbo_confirm: 'Are you sure?' }} %>
+      <%= button_to 'Delete', post_delete_path(@post), method: :delete %>
       <%= link_to 'Edit', edit_post_path %>
       <%= link_to 'Home', posts_path %>
 
