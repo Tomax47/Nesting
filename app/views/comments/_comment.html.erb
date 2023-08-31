@@ -9,8 +9,7 @@
 
   <!-- TODO: CHECK OUT WHY THE DELETE FUNCTION AIN'T WORKING-->
   <% if current_user.id == comment.user_id %>
-    <% comment_is = current_user.comments.find_by(post: comment.post) %>
-    <%= button_to 'Delete', post_comment_path(comment_is), method: :delete %>
+    <%= button_to 'Delete', post_comment_path(comment), method: :delete %>
   <%end %>
 
   <a href="#" class="comment-form-display">Reply</a>

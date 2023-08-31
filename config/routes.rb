@@ -1,11 +1,8 @@
 Rails.application.routes.draw do
   #get 'posts/index'
   resources :posts do
-    resources :comments, only: [:destroy, :create]
+    resources :comments, only: [:create, :destroy]
   end
-
-  #delete '/post_delete', to: 'posts#destroy'
-
 
   resources :likes, only: [:destroy, :create]
 
