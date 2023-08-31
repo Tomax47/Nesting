@@ -22,7 +22,7 @@
       <ul class="list">
         <li class="sing-up"><%= link_to 'Sing-Up', users_new_path %></li>
         <li class="sign-in"><%= link_to 'Sign-In', sessions_new_path %></li>
-        <li class="sign-out"><%= link_to 'Logout', sign_out_path, method: :delete %></li>
+        <li class="sign-out"><%= button_to 'Logout', sign_out_path, method: :delete %></li>
       </ul>
     </div>
   </header>

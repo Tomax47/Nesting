@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :sessions, only: [:create, :destroy]
   get 'sessions/new'
   get 'sing_in', to: 'sessions#new'
-  get 'sign_out', to: 'sessions#destroy'
+  delete 'sign_out', to: 'sessions#destroy'
 
   resources :users, only: [:create, :destroy]
   get 'users/new'
